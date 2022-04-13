@@ -20,9 +20,8 @@ func (restClient *restClientRepository) DoClient(req *http.Request) (*http.Respo
 	//response, err := client.Do(req)
 
 	//TODO refactorizar mock en variable de entorno
+	data := utils.LoadCommonFile("soap/xml-response-200-1.xml")
 	//data := utils.LoadCommonFile("soap/xml-response-200-ok.xml")
-	data := utils.LoadCommonFile("soap/xml-response-200-ok.xml")
-
 	response, err := utils.GetMockHttpResponse(data, 200, "200 OK", nil)
 
 	return response, err

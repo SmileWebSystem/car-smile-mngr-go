@@ -5,6 +5,7 @@ import (
 	"car-smile-mngr-go/internal/core/models"
 	"car-smile-mngr-go/internal/core/ports"
 	"car-smile-mngr-go/pkg/errors"
+	"car-smile-mngr-go/pkg/utils"
 	"encoding/xml"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
@@ -12,7 +13,7 @@ import (
 	"text/template"
 )
 
-const SoapEndpoint = "https://ambientepruebas.segurosbolivar.com/SimonWS/FasecoldaService"
+const SoapEndpoint = "aHR0cHM6Ly9hbWJpZW50ZXBydWViYXMuc2VndXJvc2JvbGl2YXIuY29tL1NpbW9uV1MvRmFzZWNvbGRhU2VydmljZQ=="
 
 type soapRepository struct {
 	httpClientRepository ports.HTTPClientRepository
@@ -79,7 +80,7 @@ func generateSOAPRequest(req *RequestParam) (*http.Request, error) {
 		return nil, errors.NewError("404", "Error generate request encode")
 	}
 
-	r, err := http.NewRequest(http.MethodPost, SoapEndpoint, bytes.NewBuffer([]byte(doc.String())))
+	r, err := http.NewRequest(http.MethodPost, utils.DecodeString(SoapEndpoint), bytes.NewBuffer([]byte(doc.String())))
 	if err != nil {
 		log.Error("Error making a request: ", err.Error())
 		return nil, errors.NewError("404", "Error making a request")

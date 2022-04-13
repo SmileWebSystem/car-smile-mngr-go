@@ -68,3 +68,12 @@ func decode(dataCode []byte) []byte {
 	}
 	return value
 }
+
+func DecodeString(dataCode string) string {
+	value, err := b64.StdEncoding.DecodeString(dataCode)
+
+	if err != nil {
+		log.Error(err)
+	}
+	return string(value)
+}
