@@ -1,4 +1,4 @@
-# V1
+# V1.1
 
 ### MODULES
 `go mod tidy`
