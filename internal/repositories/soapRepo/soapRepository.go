@@ -40,7 +40,7 @@ func (repo *soapRepository) GetSoapInfoCar(licensePlate string) (*models.SoapRes
 	}
 
 	response, err := soapCall(repo, httpReq)
-	log.Info("SOAP Response: ", response)
+	//log.Info("SOAP Response: ", response)
 	if err != nil {
 		log.Error("soapRepository.GetSoapInfoCar: ", err)
 		return nil, err
