@@ -11,5 +11,5 @@ type MyResponse struct {
 }
 
 func Handler(event MyInput) (MyResponse, error) {
-	return MyResponse{StatusCode: "200", StatusMessage: event.Action}, nil
+	return MyResponse{StatusCode: "201", StatusMessage: event.Action}, nil
 }
