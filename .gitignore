@@ -43,6 +43,7 @@ _cgo_export.*
 base64/
 
 target/
+terraform_infra/target/
 
 ############### Terraform ###############
 # Local .terraform directories
