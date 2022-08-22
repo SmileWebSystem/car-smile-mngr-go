@@ -1,8 +1,6 @@
 package app
 
-import (
-	"github.com/aws/aws-lambda-go/lambda"
-)
+import "github.com/apex/gateway"
 
 func LocalStart() {
 	router := GetRoutes()
@@ -10,6 +8,6 @@ func LocalStart() {
 }
 
 func LambdaStar() {
-	lambda.Start(Handler)
+	gateway.ListenAndServe(":8080", GetRoutes())
 
 }

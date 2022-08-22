@@ -1,5 +1,8 @@
 build:
-	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o terraform_infra/target/golambdabin -ldflags '-w' main.go && zip -j terraform_infra/target/golambda.zip target/golambdabin
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o terraform_infra/target/golambdabin -ldflags '-w' main.go && zip -j terraform_infra/target/golambda.zip terraform_infra/target/golambdabin
+
+format:
+	terraform -chdir=terraform_infra fmt
 
 check:
 	terraform -chdir=terraform_infra fmt -check

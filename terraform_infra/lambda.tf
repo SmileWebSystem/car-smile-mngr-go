@@ -14,6 +14,16 @@ resource "aws_lambda_function" "car-smile-mngr" {
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 
   role = aws_iam_role.lambda_exec.arn
+
+  timeout = 120
+
+  environment {
+    variables = {
+      MOCK = var.use_mock
+      DEPLOY_LOCAL = "false"
+    }
+  }
+
 }
 
 resource "aws_cloudwatch_log_group" "car-smile-mngr" {

@@ -12,3 +12,9 @@ variable "rest_api_name" {
   description = "Name of the API Gateway created"
   default     = "car-smile-api"
 }
+
+variable "use_mock" {
+  type        = string
+  description = "Indica si se despliega en modo mock o real"
+  default     = "false"
+}

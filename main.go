@@ -6,9 +6,10 @@ import (
 )
 
 func main() {
-	if os.Getenv("LOCAL") == "" {
-		app.LambdaStar()
-	} else {
+	if os.Getenv("DEPLOY_LOCAL") == "true" {
 		app.LocalStart()
+	} else {
+		app.LambdaStar()
+
 	}
 }
