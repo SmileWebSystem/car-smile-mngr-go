@@ -21,6 +21,7 @@ func LoadJson(filePath string) []byte {
 }
 
 func LoadCommonFile(filePath string) []byte {
+	log.Info("----filePath----:", filePath)
 	resourceFolderPath := getResourceFolderPath()
 	fullPath := fmt.Sprintf("%s%s", resourceFolderPath, filePath)
 	resource, err := ioutil.ReadFile(fullPath)
@@ -32,13 +33,16 @@ func LoadCommonFile(filePath string) []byte {
 
 func getResourceFolderPath() string {
 	workingDir, _ := os.Getwd()
+	log.Info("----workingDir----:", workingDir)
 	var dirSplit []string
 	dirSplit = strings.Split(workingDir, "car-smile-mngr-go")
+	log.Info("----dirSplit----:", dirSplit)
 	if len(dirSplit) == 2 {
 		return dirSplit[0] + "car-smile-mngr-go/pkg/test/resources/"
 	} else {
 		dirSplit = strings.Split(workingDir, "/app")
-		return "/app/pkg/test/resources/"
+		log.Info("----dirSplit2----:", dirSplit)
+		return workingDir + "/pkg/test/resources/"
 	}
 }
 

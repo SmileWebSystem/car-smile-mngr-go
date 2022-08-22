@@ -2,8 +2,14 @@ package main
 
 import (
 	"car-smile-mngr-go/cmd/app"
+	"os"
 )
 
 func main() {
-	app.Start()
+	if os.Getenv("DEPLOY_LOCAL") == "true" {
+		app.LocalStart()
+	} else {
+		app.LambdaStar()
+
+	}
 }

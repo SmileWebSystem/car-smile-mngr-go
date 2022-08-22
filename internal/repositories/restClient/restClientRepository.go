@@ -19,13 +19,13 @@ func NewClientRepository() *restClientRepository {
 func (restClient *restClientRepository) DoClient(req *http.Request) (*http.Response, error) {
 
 	//use mock
-	if os.Getenv("MOCK") != "" {
+	if os.Getenv("MOCK") == "true" {
 		return doClientMock()
 	}
 
 	log.Info("Use Mode REAL")
 	client := &http.Client{
-		Timeout: 20 * time.Second,
+		Timeout: 120 * time.Second,
 	}
 	response, err := client.Do(req)
 
