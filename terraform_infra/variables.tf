@@ -1,6 +1,6 @@
 # Input variable definitions
 
-variable "aws_region" {
+variable "AWS_REGION" {
   description = "AWS region for all resources."
 
   type    = string

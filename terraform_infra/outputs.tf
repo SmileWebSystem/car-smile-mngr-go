@@ -12,8 +12,6 @@ output "function_name" {
   value = aws_lambda_function.car-smile-mngr.function_name
 }
 
-# output "base_url" {
-#   description = "Base URL for API Gateway stage."
-
-#   value = aws_apigatewayv2_stage.lambda.invoke_url
-# }
+output "base_url" {
+  value = aws_api_gateway_deployment.rest_api_car_deploy.invoke_url
+}

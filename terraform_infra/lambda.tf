@@ -19,7 +19,7 @@ resource "aws_lambda_function" "car-smile-mngr" {
 
   environment {
     variables = {
-      MOCK = var.use_mock
+      MOCK         = var.use_mock
       DEPLOY_LOCAL = "false"
     }
   }
