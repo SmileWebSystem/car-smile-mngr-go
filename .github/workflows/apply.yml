@@ -23,22 +23,22 @@ jobs:
           # terraform_version: 0.13.0:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Terraform Format
+      - name: Terraform Format check
         id: fmt
-        run: -chdir=terraform_infra fmt
+        run: terraform -chdir=terraform_infra fmt -check
 
       - name: Terraform Init
         id: init
-        run: -chdir=terraform_infra init
+        run: terraform -chdir=terraform_infra init
 
       - name: Terraform Validate
         id: validate
-        run: -chdir=terraform_infra validate -no-color
+        run: terraform -chdir=terraform_infra validate -no-color
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: -chdir=terraform_infra plan -no-color -input=false
+        run: terraform -chdir=terraform_infra plan -no-color -input=false
         continue-on-error: true
 
       - uses: actions/github-script@v6
@@ -70,4 +70,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: -chdir=terraform_infra apply --auto-approve
+        run: terraform -chdir=terraform_infra apply --auto-approve
