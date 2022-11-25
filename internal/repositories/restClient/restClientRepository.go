@@ -35,7 +35,8 @@ func (restClient *restClientRepository) DoClient(req *http.Request) (*http.Respo
 func doClientMock() (*http.Response, error) {
 	log.Info("Use Mode MOCK")
 
-	data := utils.LoadCommonFile("soap/xml-response-200-1.xml")
+	//data := utils.LoadCommonFile("soap/xml-response-200-1.xml")
+	data := utils.LoadCommonFile("soap/xml-response-200-2.xml")
 	//data := utils.LoadCommonFile("soap/xml-response-200-ok.xml")
 	response, err := utils.GetMockHttpResponse(data, 200, "200 OK", nil)
 
