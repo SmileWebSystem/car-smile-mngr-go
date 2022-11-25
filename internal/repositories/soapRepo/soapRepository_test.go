@@ -16,9 +16,6 @@ type mock struct {
 	err    error
 }
 
-//
-//
-//
 func TestGetSoapInfoCarOk(t *testing.T) {
 
 	type want struct {
@@ -39,7 +36,7 @@ func TestGetSoapInfoCarOk(t *testing.T) {
 				err:    nil,
 			},
 			want: want{
-				totalHist: 4,
+				totalHist: 3,
 			},
 		},
 	}
@@ -68,9 +65,6 @@ func TestGetSoapInfoCarOk(t *testing.T) {
 
 }
 
-//
-//
-//
 func TestGetSoapInfoCarErrors(t *testing.T) {
 
 	type want struct {
