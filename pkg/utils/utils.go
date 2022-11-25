@@ -27,6 +27,7 @@ func LoadCommonFile(filePath string) []byte {
 	resource, err := ioutil.ReadFile(fullPath)
 	if err != nil {
 		log.Infof("[Testutils] Cannot load the resource %s", err)
+		panic(err)
 	}
 	return decode(resource)
 }
@@ -69,6 +70,7 @@ func decode(dataCode []byte) []byte {
 
 	if err != nil {
 		log.Error(err)
+		panic(err)
 	}
 	return value
 }
