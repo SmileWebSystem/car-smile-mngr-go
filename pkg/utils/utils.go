@@ -38,13 +38,13 @@ func getResourceFolderPath() string {
 	var dirSplit []string
 	dirSplit = strings.Split(workingDir, "car-smile-mngr-go")
 	log.Info("----dirSplit----:", dirSplit)
-	if len(dirSplit) == 2 {
-		return dirSplit[0] + "car-smile-mngr-go/pkg/test/resources/"
-	} else {
-		dirSplit = strings.Split(workingDir, "/app")
-		log.Info("----dirSplit2----:", dirSplit)
-		return workingDir + "/pkg/test/resources/"
-	}
+	//if len(dirSplit) == 2 {
+	return dirSplit[0] + "car-smile-mngr-go/pkg/test/resources/"
+	//} else {
+	//	dirSplit = strings.Split(workingDir, "/app")
+	//	log.Info("----dirSplit2----:", dirSplit)
+	//	return workingDir + "/pkg/test/resources/"
+	//}
 }
 
 func minify(jsonB []byte) ([]byte, error) {
