@@ -26,9 +26,6 @@ func NewSoapRepository(httpClientRepository ports.HTTPClientRepository) *soapRep
 
 }
 
-//
-//
-//
 func (repo *soapRepository) GetSoapInfoCar(licensePlate string) (*models.SoapResponse, error) {
 	log.Info("soapRepo.GetSoapInfoCar: ", licensePlate)
 
@@ -54,11 +51,8 @@ func (repo *soapRepository) GetSoapInfoCar(licensePlate string) (*models.SoapRes
 	return response, nil
 }
 
-//
-//
-//
 func generateSOAPRequest(req *RequestParam) (*http.Request, error) {
-	template, err := template.New("InputRequest").Parse(templateRequest)
+	template, err := template.New("InputRequest").Parse(string(utils.LoadCommonFile("soap/templateRequest/template-request.xml")))
 	if err != nil {
 		log.Error("Error while marshling object: ", err.Error())
 		return nil, errors.NewError("404", "Error while marshling object")
@@ -89,9 +83,6 @@ func generateSOAPRequest(req *RequestParam) (*http.Request, error) {
 	return r, nil
 }
 
-//
-//
-//
 func soapCall(repo *soapRepository, req *http.Request) (*models.SoapResponse, error) {
 
 	resp, err := repo.httpClientRepository.DoClient(req)

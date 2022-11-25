@@ -4,6 +4,7 @@ import (
 	"car-smile-mngr-go/internal/core/ports"
 	"car-smile-mngr-go/internal/core/services/carsrv"
 	"car-smile-mngr-go/internal/handlers/carhdl"
+	"car-smile-mngr-go/internal/handlers/versionhdl"
 	"car-smile-mngr-go/internal/repositories/restClient"
 	"car-smile-mngr-go/internal/repositories/soapRepo"
 )
@@ -14,6 +15,7 @@ type Definition struct {
 	SoapRepository       ports.SoapRepository
 	HttpClientRepository ports.HTTPClientRepository
 	CarHandler           *carhdl.Handler
+	VersionHandler       *versionhdl.Handler
 }
 
 func initializeDependencies() *Definition {

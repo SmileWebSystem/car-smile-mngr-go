@@ -27,6 +27,7 @@ func LoadCommonFile(filePath string) []byte {
 	resource, err := ioutil.ReadFile(fullPath)
 	if err != nil {
 		log.Infof("[Testutils] Cannot load the resource %s", err)
+		panic(err)
 	}
 	return decode(resource)
 }
@@ -38,11 +39,11 @@ func getResourceFolderPath() string {
 	dirSplit = strings.Split(workingDir, "car-smile-mngr-go")
 	log.Info("----dirSplit----:", dirSplit)
 	if len(dirSplit) == 2 {
+		//format in local
 		return dirSplit[0] + "car-smile-mngr-go/pkg/test/resources/"
 	} else {
-		dirSplit = strings.Split(workingDir, "/app")
-		log.Info("----dirSplit2----:", dirSplit)
-		return workingDir + "/pkg/test/resources/"
+		//format CI in gitHub actions
+		return dirSplit[0] + "car-smile-mngr-go/car-smile-mngr-go/pkg/test/resources/"
 	}
 }
 
@@ -69,6 +70,7 @@ func decode(dataCode []byte) []byte {
 
 	if err != nil {
 		log.Error(err)
+		panic(err)
 	}
 	return value
 }
