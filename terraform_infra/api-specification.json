@@ -1,269 +1,299 @@
 {
-  "openapi" : "3.0.1",
-  "info" : {
-    "title" : "car-smile-api",
-    "version" : "1.0.0"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "car-smile-api",
+    "version": "1.0.0"
   },
-  "servers" : [{
-    "url" : "https://k5o9nsfxcf.execute-api.us-east-1.amazonaws.com/{basePath}",
-    "variables" : {
-      "basePath" : {
-        "default" : "/dev"
+  "servers": [
+    {
+      "url": "https://k5o9nsfxcf.execute-api.us-east-1.amazonaws.com/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "/dev"
+        }
       }
     }
-  }],
-  "paths" : {
-    "/smile/v2/car/{licensePlate}" : {
-      "get" : {
-        "parameters" : [{
-          "name" : "licensePlate",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
+  ],
+  "paths": {
+    "/smile/v2/car/{licensePlate}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "licensePlate",
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "required": true
           }
-        }],
-        "responses" : {
-          "200" : {
-            "description" : "200 response",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/CarInfo"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CarInfo"
                 }
               }
-            }
+            },
+            "description": "200 response"
           }
         },
-        "x-amazon-apigateway-integration" : {
-          "type" : "aws_proxy",
-          "httpMethod" : "POST",
-          "uri" : "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_identity_arn}/invocations",
-          "responses" : {
-            "default" : {
-              "statusCode" : "200"
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_identity_arn}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
             }
           },
-          "passthroughBehavior" : "when_no_match",
-          "contentHandling" : "CONVERT_TO_TEXT"
+          "passthroughBehavior": "when_no_match",
+          "contentHandling": "CONVERT_TO_TEXT"
+        }
+      }
+    },
+    "/smile/v2/car/version": {
+      "get": {
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "version app"
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "type": "aws_proxy",
+          "httpMethod": "GET",
+          "uri": "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_identity_arn}/invocations",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "passthroughBehavior": "when_no_match",
+          "contentHandling": "CONVERT_TO_TEXT"
         }
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "CarInfo" : {
-        "required" : ["LicensePlate"],
-        "type" : "object",
-        "properties" : {
-          "Claims" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/CarClaim"
+  "components": {
+    "schemas": {
+      "CarInfo": {
+        "required": [
+          "LicensePlate"
+        ],
+        "type": "object",
+        "properties": {
+          "Claims": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarClaim"
             }
           },
-          "Guia" : {
-            "$ref" : "#/components/schemas/CarGuia"
+          "Guia": {
+            "$ref": "#/components/schemas/CarGuia"
           },
-          "History" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/CarHistory"
+          "History": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarHistory"
             }
           },
-          "LicensePlate" : {
-            "type" : "string"
+          "LicensePlate": {
+            "type": "string"
           },
-          "Owners" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/CarOwner"
+          "Owners": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarOwner"
             }
           },
-          "Score" : {
-            "$ref" : "#/components/schemas/CarScore"
+          "Score": {
+            "$ref": "#/components/schemas/CarScore"
           },
-          "Simis" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/CarSimi"
+          "Simis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarSimi"
             }
           }
         }
       },
-      "CarSimi" : {
-        "type" : "object",
-        "properties" : {
-          "Code" : {
-            "type" : "string"
+      "CarSimi": {
+        "type": "object",
+        "properties": {
+          "Code": {
+            "type": "string"
           },
-          "Date" : {
-            "type" : "string"
+          "Date": {
+            "type": "string"
           },
-          "Name" : {
-            "type" : "string"
+          "Name": {
+            "type": "string"
           },
-          "Number" : {
-            "type" : "string"
+          "Number": {
+            "type": "string"
           },
-          "Status" : {
-            "type" : "string"
+          "Status": {
+            "type": "string"
           },
-          "Value" : {
-            "type" : "string"
+          "Value": {
+            "type": "string"
           }
         }
       },
-      "CarHistory" : {
-        "type" : "object",
-        "properties" : {
-          "Active" : {
-            "type" : "string"
+      "CarHistory": {
+        "type": "object",
+        "properties": {
+          "Active": {
+            "type": "string"
           },
-          "Beneficiary" : {
-            "type" : "string"
+          "Beneficiary": {
+            "type": "string"
           },
-          "Chassis" : {
-            "type" : "string"
+          "Chassis": {
+            "type": "string"
           },
-          "CodeCompany" : {
-            "type" : "string"
+          "CodeCompany": {
+            "type": "string"
           },
-          "DateFin" : {
-            "type" : "string"
+          "DateFin": {
+            "type": "string"
           },
-          "DateIni" : {
-            "type" : "string"
+          "DateIni": {
+            "type": "string"
           },
-          "Engine" : {
-            "type" : "string"
+          "Engine": {
+            "type": "string"
           },
-          "InsuredAmount" : {
-            "type" : "string"
+          "InsuredAmount": {
+            "type": "string"
           },
-          "LicensePlate" : {
-            "type" : "string"
+          "LicensePlate": {
+            "type": "string"
           },
-          "NameCompany" : {
-            "type" : "string"
+          "NameCompany": {
+            "type": "string"
           },
-          "PolicyHolder" : {
-            "type" : "string"
+          "PolicyHolder": {
+            "type": "string"
           },
-          "PolicyHolderId" : {
-            "type" : "string"
+          "PolicyHolderId": {
+            "type": "string"
           },
-          "PolicyNumber" : {
-            "type" : "string"
+          "PolicyNumber": {
+            "type": "string"
           },
-          "Service" : {
-            "type" : "string"
+          "Service": {
+            "type": "string"
           }
         }
       },
-      "CarGuia" : {
-        "type" : "object",
-        "properties" : {
-          "ActualValue" : {
-            "type" : "number",
-            "format" : "float"
+      "CarGuia": {
+        "type": "object",
+        "properties": {
+          "ActualValue": {
+            "format": "float",
+            "type": "number"
           },
-          "Brand" : {
-            "type" : "string"
+          "Brand": {
+            "type": "string"
           },
-          "Class" : {
-            "type" : "string"
+          "Class": {
+            "type": "string"
           },
-          "Country" : {
-            "type" : "string"
+          "Country": {
+            "type": "string"
           },
-          "Maker" : {
-            "type" : "string"
+          "Maker": {
+            "type": "string"
           },
-          "Model" : {
-            "type" : "string"
+          "Model": {
+            "type": "string"
           },
-          "Type" : {
-            "type" : "string"
+          "Type": {
+            "type": "string"
           }
         }
       },
-      "CarShelter" : {
-        "type" : "object",
-        "properties" : {
-          "AmountPaid" : {
-            "type" : "string"
+      "CarShelter": {
+        "type": "object",
+        "properties": {
+          "AmountPaid": {
+            "type": "string"
           },
-          "Date" : {
-            "type" : "string"
+          "Date": {
+            "type": "string"
           },
-          "Name" : {
-            "type" : "string"
+          "Name": {
+            "type": "string"
           },
-          "ReclaimedAmount" : {
-            "type" : "number",
-            "format" : "float"
+          "ReclaimedAmount": {
+            "format": "float",
+            "type": "number"
           },
-          "Status" : {
-            "type" : "string"
+          "Status": {
+            "type": "string"
           }
         }
       },
-      "CarOwner" : {
-        "type" : "object",
-        "properties" : {
-          "Id" : {
-            "type" : "string"
+      "CarOwner": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string"
           },
-          "Name" : {
-            "type" : "string"
+          "Name": {
+            "type": "string"
           }
         }
       },
-      "CarScore" : {
-        "type" : "object",
-        "properties" : {
-          "ScoreClaims" : {
-            "type" : "number",
-            "format" : "float"
+      "CarScore": {
+        "type": "object",
+        "properties": {
+          "ScoreClaims": {
+            "format": "float",
+            "type": "number"
           },
-          "ScoreCloseSimis" : {
-            "type" : "number",
-            "format" : "float"
+          "ScoreCloseSimis": {
+            "format": "float",
+            "type": "number"
           },
-          "ScoreOpenSimis" : {
-            "type" : "number",
-            "format" : "float"
+          "ScoreOpenSimis": {
+            "format": "float",
+            "type": "number"
           },
-          "ScoreOwners" : {
-            "type" : "number",
-            "format" : "float"
+          "ScoreOwners": {
+            "format": "float",
+            "type": "number"
           },
-          "ScoreTotal" : {
-            "type" : "number",
-            "format" : "float"
+          "ScoreTotal": {
+            "format": "float",
+            "type": "number"
           }
         }
       },
-      "CarClaim" : {
-        "type" : "object",
-        "properties" : {
-          "Company" : {
-            "type" : "string"
+      "CarClaim": {
+        "type": "object",
+        "properties": {
+          "Company": {
+            "type": "string"
           },
-          "Date" : {
-            "type" : "string"
+          "Date": {
+            "type": "string"
           },
-          "NumberClaim" : {
-            "type" : "string"
+          "NumberClaim": {
+            "type": "string"
           },
-          "NumberPolicy" : {
-            "type" : "string"
+          "NumberPolicy": {
+            "type": "string"
           },
-          "Shelters" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/CarShelter"
+          "Shelters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CarShelter"
             }
           }
         }

@@ -36,7 +36,7 @@ func TestGetSoapInfoCarOk(t *testing.T) {
 				err:    nil,
 			},
 			want: want{
-				totalHist: 3,
+				totalHist: 4,
 			},
 		},
 	}

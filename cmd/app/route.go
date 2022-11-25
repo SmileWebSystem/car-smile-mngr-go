@@ -2,6 +2,8 @@ package app
 
 import "github.com/gin-gonic/gin"
 
+const baseUrl = "/smile/v2/car"
+
 func GetRoutes() *gin.Engine {
 
 	router := gin.Default()
@@ -12,6 +14,7 @@ func GetRoutes() *gin.Engine {
 
 func setRoutes(router *gin.Engine, definition *Definition) {
 
-	router.GET("/smile/v2/car/:licensePlate", definition.CarHandler.CheckCarHandler)
+	router.GET(baseUrl+"/:licensePlate", definition.CarHandler.CheckCarHandler)
+	router.GET(baseUrl+"/version", definition.VersionHandler.VersionHandler)
 
 }
