@@ -24,12 +24,12 @@ func LoadCommonFile(filePath string) []byte {
 	log.Info("----filePath----:", filePath)
 	resourceFolderPath := getResourceFolderPath()
 	fullPath := fmt.Sprintf("%s%s", resourceFolderPath, filePath)
-	resource, err := ioutil.ReadFile(fullPath)
+	resource, err := os.ReadFile(fullPath)
 	if err != nil {
 		log.Infof("[Testutils] Cannot load the resource %s", err)
 		panic(err)
 	}
-	return decode(resource)
+	return Decode(resource)
 }
 
 func getResourceFolderPath() string {
@@ -65,7 +65,7 @@ func minify(jsonB []byte) ([]byte, error) {
 	return b, nil
 }
 
-func decode(dataCode []byte) []byte {
+func Decode(dataCode []byte) []byte {
 	value, err := b64.StdEncoding.DecodeString(string(dataCode))
 
 	if err != nil {

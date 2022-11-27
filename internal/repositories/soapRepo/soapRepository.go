@@ -6,6 +6,7 @@ import (
 	"car-smile-mngr-go/internal/core/ports"
 	"car-smile-mngr-go/pkg/errors"
 	"car-smile-mngr-go/pkg/utils"
+	_ "embed"
 	"encoding/xml"
 	log "github.com/sirupsen/logrus"
 	"io/ioutil"
@@ -14,6 +15,9 @@ import (
 )
 
 const SoapEndpoint = "aHR0cHM6Ly9hbWJpZW50ZXBydWViYXMuc2VndXJvc2JvbGl2YXIuY29tL1NpbW9uV1MvRmFzZWNvbGRhU2VydmljZQ=="
+
+//go:embed templateRequest/template-request.xml
+var templateRequestFile []byte
 
 type soapRepository struct {
 	httpClientRepository ports.HTTPClientRepository
@@ -52,7 +56,7 @@ func (repo *soapRepository) GetSoapInfoCar(licensePlate string) (*models.SoapRes
 }
 
 func generateSOAPRequest(req *RequestParam) (*http.Request, error) {
-	template, err := template.New("InputRequest").Parse(string(utils.LoadCommonFile("soap/templateRequest/template-request.xml")))
+	template, err := template.New("InputRequest").Parse(string(utils.Decode(templateRequestFile)))
 	if err != nil {
 		log.Error("Error while marshling object: ", err.Error())
 		return nil, errors.NewError("404", "Error while marshling object")
