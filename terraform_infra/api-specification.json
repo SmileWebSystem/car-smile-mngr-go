@@ -65,7 +65,7 @@
         },
         "x-amazon-apigateway-integration": {
           "type": "aws_proxy",
-          "httpMethod": "GET",
+          "httpMethod": "POST",
           "uri": "arn:aws:apigateway:${aws_region}:lambda:path/2015-03-31/functions/${lambda_identity_arn}/invocations",
           "responses": {
             "default": {
